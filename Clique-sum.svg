@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg  version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="630" height="630" viewBox="0 0 630 630"
+	 overflow="visible" enable-background="new 0 0 630 630" xml:space="preserve">
+<g>
+	<line fill="none" stroke="#000000" stroke-width="3" x1="359.034" y1="450.58" x2="313.417" y2="496.197"/>
+	<line fill="none" stroke="#000000" stroke-width="3" x1="234.404" y1="417.186" x2="280.021" y2="371.566"/>
+	<line fill="none" stroke="#000000" stroke-width="3" x1="234.404" y1="417.186" x2="280.021" y2="371.566"/>
+	<polyline fill="none" stroke="#666666" points="178.601,371.5 234.404,417.186 162.601,432.5 	"/>
+	<path fill="none" stroke="#666666" d="M280.021,371.566"/>
+	<path fill="none" stroke="#666666" d="M234.404,417.186"/>
+	<polyline fill="none" stroke="#666666" points="251.101,479.5 178.601,371.5 281.101,371.5 162.601,432.5 251.101,479.5 	"/>
+	<path fill="none" stroke="#666666" d="M281.101,371.5"/>
+	<line fill="none" stroke="#666666" x1="313.417" y1="496.197" x2="251.101" y2="479.5"/>
+	<polyline fill="none" stroke="#666666" points="280.021,371.566 342.337,388.264 359.034,450.58 	"/>
+	<path fill="none" stroke="#666666" d="M234.404,417.186"/>
+	<polyline fill="none" stroke="#666666" points="280.021,371.566 359.034,450.58 251.101,479.5 251.335,478.623 	"/>
+	<polygon fill="none" stroke="#666666" points="313.417,496.197 234.404,417.186 342.337,388.264 	"/>
+	<polyline fill="none" stroke="#666666" points="358.432,449.346 422.963,449.346 468.594,494.977 468.594,559.508 422.963,605.139
+		358.432,605.139 312.801,559.508 312.801,494.977 	"/>
+	<line fill="none" stroke="#666666" x1="358.432" y1="449.346" x2="422.963" y2="605.139"/>
+	<line fill="none" stroke="#666666" x1="358.432" y1="605.139" x2="422.963" y2="449.346"/>
+	<line fill="none" stroke="#666666" x1="312.801" y1="494.977" x2="469.697" y2="559.742"/>
+	<line fill="none" stroke="#666666" x1="312.801" y1="559.508" x2="468.594" y2="494.977"/>
+	<circle fill="#FFB4FF" stroke="#000000" cx="358.432" cy="449.346" r="9"/>
+	<circle fill="#FFE1E1" stroke="#000000" cx="422.963" cy="449.346" r="9"/>
+	<circle fill="#FFE1E1" stroke="#000000" cx="468.594" cy="494.977" r="9"/>
+	<circle fill="#FFE1E1" stroke="#000000" cx="468.594" cy="559.508" r="9"/>
+	<circle fill="#FFE1E1" stroke="#000000" cx="422.963" cy="605.139" r="9"/>
+	<circle fill="#FFE1E1" stroke="#000000" cx="358.432" cy="605.139" r="9"/>
+	<circle fill="#FFE1E1" stroke="#000000" cx="312.801" cy="559.508" r="9"/>
+	<circle fill="#FFB4FF" stroke="#000000" cx="312.801" cy="494.977" r="9"/>
+	<circle fill="#E1E1FF" stroke="#000000" cx="342.337" cy="388.264" r="9"/>
+	<circle fill="#B4FFFF" stroke="#000000" cx="280.021" cy="371.566" r="9"/>
+	<circle fill="#B4FFFF" stroke="#000000" cx="234.404" cy="417.186" r="9"/>
+	<circle fill="#B4FFFF" stroke="#000000" cx="251.101" cy="479.5" r="9"/>
+	<circle fill="#E1FFE1" stroke="#000000" cx="162.601" cy="432.5" r="9"/>
+	<circle fill="#E1FFE1" stroke="#000000" cx="178.601" cy="371.5" r="9"/>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#000000" stroke-width="3" x1="451.003" y1="68.833" x2="496.634" y2="23.202"/>
+		<polyline fill="none" stroke="#666666" points="496.634,23.202 561.165,23.202 606.796,68.833 606.796,133.364 561.165,178.995
+			496.634,178.995 451.003,133.364 451.003,68.833 		"/>
+		<line fill="none" stroke="#666666" x1="496.634" y1="23.202" x2="561.165" y2="178.995"/>
+		<line fill="none" stroke="#666666" x1="496.634" y1="178.995" x2="561.165" y2="23.202"/>
+		<line fill="none" stroke="#666666" x1="451.003" y1="68.833" x2="607.899" y2="133.599"/>
+		<line fill="none" stroke="#666666" x1="451.003" y1="133.364" x2="606.796" y2="68.833"/>
+		<circle fill="#FFB4FF" stroke="#000000" cx="496.634" cy="23.202" r="9"/>
+		<circle fill="#FFE1E1" stroke="#000000" cx="561.165" cy="23.202" r="9"/>
+		<circle fill="#FFE1E1" stroke="#000000" cx="606.796" cy="68.833" r="9"/>
+		<circle fill="#FFE1E1" stroke="#000000" cx="606.796" cy="133.364" r="9"/>
+		<circle fill="#FFE1E1" stroke="#000000" cx="561.165" cy="178.995" r="9"/>
+		<circle fill="#FFE1E1" stroke="#000000" cx="496.634" cy="178.995" r="9"/>
+		<circle fill="#FFE1E1" stroke="#000000" cx="451.003" cy="133.364" r="9"/>
+		<circle fill="#FFB4FF" stroke="#000000" cx="451.003" cy="68.833" r="9"/>
+	</g>
+	<g>
+		<line fill="none" stroke="#000000" stroke-width="3" x1="358.633" y1="118.406" x2="313.016" y2="164.023"/>
+		<line fill="none" stroke="#000000" stroke-width="3" x1="234.003" y1="85.012" x2="279.62" y2="39.393"/>
+		<line fill="none" stroke="#000000" stroke-width="3" x1="250.699" y1="147.326" x2="234.003" y2="85.012"/>
+		<line fill="none" stroke="#000000" stroke-width="3" x1="250.933" y1="146.449" x2="279.62" y2="39.393"/>
+		<line fill="none" stroke="#666666" x1="313.016" y1="164.023" x2="250.699" y2="147.326"/>
+		<polyline fill="none" stroke="#666666" points="279.62,39.393 341.936,56.09 358.633,118.406 		"/>
+		<path fill="none" stroke="#666666" d="M234.003,85.012"/>
+		<polyline fill="none" stroke="#666666" points="279.62,39.393 358.633,118.406 250.699,147.326 250.933,146.449 		"/>
+		<polygon fill="none" stroke="#666666" points="313.016,164.023 234.003,85.012 341.936,56.09 		"/>
+		<circle fill="#FFB4FF" stroke="#000000" cx="357.399" cy="118.303" r="9"/>
+		<circle fill="#E1E1FF" stroke="#000000" cx="341.936" cy="56.09" r="9"/>
+		<circle fill="#B4FFFF" stroke="#000000" cx="279.62" cy="39.393" r="9"/>
+		<circle fill="#B4FFFF" stroke="#000000" cx="234.003" cy="85.012" r="9"/>
+		<circle fill="#B4FFFF" stroke="#000000" cx="250.699" cy="147.326" r="9"/>
+		<circle fill="#FFB4FF" stroke="#000000" cx="312.399" cy="162.803" r="9"/>
+	</g>
+	<g>
+		<line fill="none" stroke="#000000" stroke-width="3" x1="96.203" y1="92.784" x2="141.82" y2="47.165"/>
+		<line fill="none" stroke="#000000" stroke-width="3" x1="112.899" y1="155.099" x2="96.203" y2="92.784"/>
+		<line fill="none" stroke="#000000" stroke-width="3" x1="142.899" y1="47.099" x2="112.899" y2="155.099"/>
+		<polyline fill="none" stroke="#666666" points="40.399,47.099 96.203,92.784 24.399,108.099 		"/>
+		<path fill="none" stroke="#666666" d="M141.82,47.165"/>
+		<path fill="none" stroke="#666666" d="M96.203,92.784"/>
+		<polyline fill="none" stroke="#666666" points="112.899,155.099 40.399,47.099 142.899,47.099 24.399,108.099 112.899,155.099
+			"/>
+		<path fill="none" stroke="#666666" d="M142.899,47.099"/>
+		<circle fill="#B4FFFF" stroke="#000000" cx="141.82" cy="47.165" r="9"/>
+		<circle fill="#B4FFFF" stroke="#000000" cx="96.203" cy="92.784" r="9"/>
+		<circle fill="#B4FFFF" stroke="#000000" cx="112.899" cy="155.099" r="9"/>
+		<circle fill="#E1FFE1" stroke="#000000" cx="24.399" cy="108.099" r="9"/>
+		<circle fill="#E1FFE1" stroke="#000000" cx="40.399" cy="47.099" r="9"/>
+	</g>
+	<g>
+		<line fill="none" stroke="#8B5C29" stroke-width="4" x1="180.232" y1="82" x2="180.232" y2="114"/>
+		<line fill="none" stroke="#8B5C29" stroke-width="4" x1="164.232" y1="98" x2="196.232" y2="98"/>
+	</g>
+	<g>
+		<line fill="none" stroke="#8B5C29" stroke-width="4" x1="402.233" y1="82" x2="402.233" y2="114"/>
+		<line fill="none" stroke="#8B5C29" stroke-width="4" x1="386.233" y1="98" x2="418.233" y2="98"/>
+	</g>
+	<g>
+		<line fill="none" stroke="#E4BC96" stroke-width="20" x1="296.899" y1="214" x2="296.899" y2="275"/>
+		<path fill="#E4BC96" d="M296.899,305.176c-5.269-14.199-14.258-31.816-23.774-42.734l23.774,8.599l23.774-8.599
+			C311.157,273.359,302.165,290.977,296.899,305.176z"/>
+	</g>
+</g>
+<rect fill="none" width="630" height="630"/>
+</svg>
