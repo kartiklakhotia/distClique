@@ -70,6 +70,12 @@ make
 
 Running this command will compile and return the executables for the shared memory K-clique program and distributed memory K-clique program (cliqueShared and cliqueParallel respectively). We utilize Open MPI's "wrapper" compiler mpic++ and use C++ 11. 
 
+
+#Pre-Requisites
+
+1. OpenMP >4.5
+2. MPI3 support (tested on MVIAPCH2)
+
 ## Run
 
 To run the distributed memory program:

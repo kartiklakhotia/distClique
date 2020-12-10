@@ -3,11 +3,11 @@ CFLAGS=-O9 -std=c++11 -fopenmp
 
 all: cliqueParallel cliqueShared
 
-cliqueParallel : KClique_DistributedMemory.c
-	$(CC) $(CFLAGS) KClique_DistributedMemory.c -o cliqueParallel
+cliqueParallel : kclique_distributed.cpp
+	$(CC) $(CFLAGS) kclique_distributed.cpp -o cliqueParallel
 
-cliqueShared : KClique_SharedMemory.c
-	$(CC) $(CFLAGS) KClique_SharedMemory.c -o cliqueShared 
+cliqueShared : kclique_shared.cpp
+	$(CC) $(CFLAGS) kclique_shared.cpp -o cliqueShared 
 
 clean:
 	rm cliqueParallel
