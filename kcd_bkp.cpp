@@ -1285,16 +1285,16 @@ unsigned long long kclique_main(unsigned char k, unsigned startV, unsigned strid
 
 int main(int argc, char** argv) {
 	
-  edgelist* el;
+    edgelist* el;
 	graph* g;
 
-  if (argc < 5)
-  {
-      printf("Usage: ./DDegColNodeParallel <num_threads> <k> <graph_file> <num_partitions>\n");
-      exit(1);
-  }
+    if (argc < 4)
+    {
+        printf("Usage: ./DDegColNodeParallel <num_threads> <k> <graph_file>\n");
+        exit(1);
+    }
 
-  MPI_Init(&argc, &argv);
+    MPI_Init(&argc, &argv);
     
 	unsigned char k = atoi(argv[2]);
 	unsigned long long n;
@@ -1330,48 +1330,47 @@ int main(int argc, char** argv) {
 
 	//printf("Iterate over all cliques\n");
 
-  graph* gFilt;
-  n = 0;
-  
-  // Rank of process
-  int my_rank, comm_size;
-  MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-  MPI_Comm_size(MPI_COMM_WORLD, &comm_size);
-  
-  unsigned stride = std::max(atoi(argv[4]), comm_size);
-
-  int window_buffer = 0;
-  int i = 1;
-
-  MPI_Win win;
-  MPI_Win_create(&window_buffer, sizeof(int), sizeof(int), MPI_INFO_NULL, MPI_COMM_WORLD, &win);
-  MPI_Win_fence(0, win);
-
-  int val = 0;
-  while(val < stride){
-      
-      MPI_Win_lock(MPI_LOCK_EXCLUSIVE, 0, 0, win);
-      MPI_Fetch_and_op(&i, &val, MPI_INT, 0, 0, MPI_SUM, win);
-      MPI_Win_unlock(0, win);
-      
-      if(val >= stride){
-          break;
-      }
-      
-      gFilt = extractSub(g, val, stride, k-2);
-      
-      unsigned long long locCount = kclique_main(k, val, stride, gFilt);
-      n += locCount;
-      
-      std::cout << "n count: " << locCount << "val: " << val << std::endl;
-
-      free_graph(gFilt);
-  }
+    unsigned stride = 3;
+    graph* gFilt;
+    n = 0;
     
-  int numCliques = 0;
-  MPI_Allreduce(&n, &numCliques, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
-                   
-  MPI_Win_fence(0, win);
+    // Rank of process
+    int my_rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+    
+    int window_buffer = 0;
+    int i = 1;
+
+    MPI_Win win;
+    MPI_Win_create(&window_buffer, sizeof(int), sizeof(int), MPI_INFO_NULL, MPI_COMM_WORLD, &win);
+    MPI_Win_fence(0, win);
+
+    int val = 0;
+    while(val < stride){
+        
+        MPI_Win_lock(MPI_LOCK_EXCLUSIVE, 0, 0, win);
+        MPI_Fetch_and_op(&i, &val, MPI_INT, 0, 0, MPI_SUM, win);
+        MPI_Win_unlock(0, win);
+        
+        if(val >= stride){
+            break;
+        }
+        
+        gFilt = extractSub(g, val, stride, k-2);
+        
+        unsigned long long locCount = kclique_main(k, val, stride, gFilt);
+        n += locCount;
+        
+        std::cout << "n count: " << locCount << "val: " << val << std::endl;
+
+        free_graph(gFilt);
+    }
+    
+    int numCliques = 0;
+    MPI_Allreduce(&n, &numCliques, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+                     
+    MPI_Win_fence(0, win);
+
 
 	printf("Number of %u-cliques: %llu\n", k, numCliques);
 

@@ -1285,9 +1285,9 @@ int main(int argc, char** argv) {
 	edgelist* el;
 	graph* g;
 
-    if (argc < 4)
+    if (argc < 5)
     {
-        printf("Usage: ./DDegColNodeParallel <num_threads> <k> <graph_file>\n");
+        printf("Usage: ./DDegColNodeParallel <num_threads> <k> <graph_file> <num_partitions>\n");
         exit(1);
     }
 
@@ -1325,20 +1325,20 @@ int main(int argc, char** argv) {
 
 	//printf("Iterate over all cliques\n");
 
+  unsigned stride = atoi(argv[4]);
 
-    unsigned stride = 3;
-    graph* gFilt;
-    n = 0;
-    for (unsigned i = 0; i < stride; i++)
-    {
-        gFilt = extractSub(g, i, stride, k-2); 
-        unsigned long long locCount = kclique_main(k, i, stride, gFilt);
-        n += locCount;
-        
-        std::cout << "n count: " << locCount << "val: " << i << std::endl;
+  graph* gFilt;
+  n = 0;
+  for (unsigned i = 0; i < stride; i++)
+  {
+      gFilt = extractSub(g, i, stride, k-2); 
+      unsigned long long locCount = kclique_main(k, i, stride, gFilt);
+      n += locCount;
+      
+      std::cout << "n count: " << locCount << "val: " << i << std::endl;
 
-        free_graph(gFilt);
-    }
+      free_graph(gFilt);
+  }
 
 	printf("Number of %u-cliques: %llu\n", k, n);
 

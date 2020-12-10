@@ -81,7 +81,7 @@ Running this command will compile and return the executables for the shared memo
 
 To run the distributed memory program:
 ```
-mpirun -n <# ranks> --map-by ppr:1:node ./cliqueParallel <num_threads> <k> <graphFile>
+mpirun -n <# ranks> --map-by ppr:1:node ./cliqueParallel <num_threads> <k> <graphFile> <num_partitions>
 ```
 
 For example, the command
@@ -92,7 +92,7 @@ will launch 2 MPI Ranks on different compute nodes, and use 8 threads per rank t
 
 To run the shared memory program:
 ```
-./cliqueShared <num_threads> <k> <graphFile>
+./cliqueShared <num_threads> <k> <graphFile> <num_partitions>
 ```
 
 The input file should represent graph in an edge list format where each line is a tuple of two integers as shown below:
