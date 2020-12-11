@@ -2,15 +2,6 @@
 Info:
 Feel free to use these lines as you wish.
 This program iterates over all k-cliques.
-
-To compile:
-"gcc DDegColNodeParallel.c -O9 -o DDegColNodeParallel -fopenmp".
-
-To execute:
-"./DDegColNodeParallel p k edgelist.txt".
-"edgelist.txt" should contain the graph: one edge on each line separated by a space.
-k is the size of the k-cliques
-p is the number of threads
 Will print the number of k-cliques.
 */
 
@@ -125,6 +116,15 @@ inline unsigned int max3(unsigned int a, unsigned int b, unsigned int c) {
 	return (a > c) ? a : c;
 }
 
+bool compareEdges(const edge lhs, const edge rhs)
+{
+    if (lhs.s != rhs.s)
+        return lhs.s < rhs.s;
+    else
+        return lhs.t <= rhs.t;
+}
+
+
 edgelist* readedgelist(char* input) {
 	unsigned e1 = NLINKS;
 	edgelist *el = (edgelist*) malloc(sizeof(edgelist));
@@ -137,7 +137,7 @@ edgelist* readedgelist(char* input) {
 	el->edges = (edge*) malloc(e1 * sizeof(edge));
 	while (fscanf(file, "%u %u", &s, &t) == 2) {//Add one edge
         if (s==t) continue;
-        el->edges[el->e].s = s; el->edges[el->e].t = t;
+        el->edges[el->e].s = std::max(s,t); el->edges[el->e].t = std::min(s,t);
 		el->n = max3(el->n, el->edges[el->e].s, el->edges[el->e].t);
 		el->e++;
 		if (el->e == e1) {
@@ -149,6 +149,24 @@ edgelist* readedgelist(char* input) {
 	el->n++;
 
 	el->edges = (edge*) realloc(el->edges, el->e * sizeof(edge));
+    std::sort(el->edges, el->edges+el->e, compareEdges);
+
+	edge* newEdges = (edge*) malloc(el->e * sizeof(edge));
+    unsigned numUniqEdges = 0;
+    edge prev; prev.s = el->n+1; prev.t = el->n+1;
+    for (unsigned i = 0; i < el->e; i++)
+    {
+        if ((el->edges[i].s==prev.s) && (el->edges[i].t==prev.t)) continue;
+        newEdges[numUniqEdges].s = el->edges[i].s; prev.s = el->edges[i].s; 
+        newEdges[numUniqEdges].t = el->edges[i].t; prev.t = el->edges[i].t;
+        numUniqEdges++;
+    }
+    newEdges = (edge*) realloc(newEdges, numUniqEdges*sizeof(edge));
+    free(el->edges);
+    el->edges = newEdges;
+    el->e = numUniqEdges;
+
+    printf("edges uniquified, num edges = %u\n", el->e);
 
 	return el;
 }
@@ -296,6 +314,7 @@ void ord_core(edgelist* el) {
 		adj0[cd0[el->edges[i].t] + d0[el->edges[i].t]++] = el->edges[i].s;
 	}
 
+
 	heap = mkheap(n, d0);
 
 	el->rank = (unsigned*) malloc(n * sizeof(unsigned));
@@ -337,6 +356,7 @@ graph* mkgraph(edgelist *el) {
 		max = (max > d[i - 1]) ? max : d[i - 1];
 		d[i - 1] = 0;
 	}
+    
 
 	//printf("core value (max truncated degree) = %u\n", max);
 
@@ -345,6 +365,7 @@ graph* mkgraph(edgelist *el) {
 	for (i = 0; i < el->e; i++) {
 		g->adj[g->cd[el->edges[i].s] + d[el->edges[i].s]++] = el->edges[i].t;
 	}
+
 
 	free(d);
 	g->core = max;
@@ -477,31 +498,38 @@ void PKT_processSubLevel_intersection(graph *g, unsigned *curr, bool *InCurr, un
 			            //Process e2
 			            int supE2 = __sync_fetch_and_sub( &EdgeSupport[e2], 1);
 			            if( supE2 == (level+1) ) 
+                        {
 			                buff[index++] = e2;
+                            index = updateGlobalQueue(index, BUFFER_SIZE, nextTail, buff, next);
+                        }
 			            if( supE2 <= level ) 
 			                __sync_fetch_and_add(&EdgeSupport[e2],1);
 
-                        index = updateGlobalQueue(index, BUFFER_SIZE, nextTail, buff, next);
 
 			            //Process e3
 			            int supE3 = __sync_fetch_and_sub(&EdgeSupport[e3], 1);
 
 			            if( supE3 == (level +1) ) 
+                        {
 			                buff[index++] = e3;
+                            index = updateGlobalQueue(index, BUFFER_SIZE, nextTail, buff, next);
+                        }
 
 			            if(supE3 <= level ) {
 			                __sync_fetch_and_add(&EdgeSupport[e3],1);
 			            }
 
-                        index = updateGlobalQueue(index, BUFFER_SIZE, nextTail, buff, next);
 		            }
 		            else if(EdgeSupport[e2] > level ) {
 			            //process e2 only if e1 < e3
 			            if((e1 < e3) || (!InCurr[e3])) {
 			                int supE2 = __sync_fetch_and_sub(&EdgeSupport[e2], 1);
-                            if (supE2 == (level+1)) buff[index++] = e2;
+                            if (supE2 == (level+1)) 
+                            {
+                                buff[index++] = e2;
+                                index = updateGlobalQueue(index, BUFFER_SIZE, nextTail, buff, next);
+                            }
                             if (supE2 <= level) __sync_fetch_and_add(&EdgeSupport[e2], 1);
-                            index = updateGlobalQueue(index, BUFFER_SIZE, nextTail, buff, next);
 			                	
 			            }
 		            }
@@ -509,9 +537,12 @@ void PKT_processSubLevel_intersection(graph *g, unsigned *curr, bool *InCurr, un
 			            //process e3 only if e1 < e2
 			            if((e1 < e2) || (!InCurr[e2])) {
 			                int supE3 = __sync_fetch_and_sub(&EdgeSupport[e3], 1);
-                            if (supE3 == (level+1)) buff[index++] = e3;
+                            if (supE3 == (level+1)) 
+                            {
+                                buff[index++] = e3;
+                                index = updateGlobalQueue(index, BUFFER_SIZE, nextTail, buff, next);
+                            }
                             if (supE3 <= level) __sync_fetch_and_add(&EdgeSupport[e3], 1);
-                            index = updateGlobalQueue(index, BUFFER_SIZE, nextTail, buff, next);
 			                	
 			            }
 		            }
@@ -1287,7 +1318,7 @@ int main(int argc, char** argv) {
 
     if (argc < 5)
     {
-        printf("Usage: ./DDegColNodeParallel <num_threads> <k> <graph_file> <num_partitions>\n");
+        printf("Usage: ./cliqueShared <num_threads> <k> <graph_file> <num_partitions>\n");
         exit(1);
     }
 
@@ -1325,22 +1356,22 @@ int main(int argc, char** argv) {
 
 	//printf("Iterate over all cliques\n");
 
-  unsigned stride = atoi(argv[4]);
-
-  graph* gFilt;
-  n = 0;
-  for (unsigned i = 0; i < stride; i++)
-  {
-      gFilt = extractSub(g, i, stride, k-2); 
-      unsigned long long locCount = kclique_main(k, i, stride, gFilt);
-      n += locCount;
-      
-      std::cout << "n count: " << locCount << "val: " << i << std::endl;
-
-      free_graph(gFilt);
-  }
-
-	printf("Number of %u-cliques: %llu\n", k, n);
+    unsigned stride = atoi(argv[4]);
+    
+    graph* gFilt;
+    n = 0;
+    for (unsigned i = 0; i < stride; i++)
+    {
+        gFilt = extractSub(g, i, stride, k-2); 
+        unsigned long long locCount = kclique_main(k, i, stride, gFilt);
+        n += locCount;
+        
+        std::cout << "n count: " << locCount << "val: " << i << std::endl;
+    
+        free_graph(gFilt);
+    }
+    
+    printf("Number of %u-cliques: %llu\n", k, n);
 
 	t2 = time(NULL);
 	//printf("- Time = %ldh%ldm%lds\n", (t2 - t1) / 3600, ((t2 - t1) % 3600) / 60, ((t2 - t1) % 60));
